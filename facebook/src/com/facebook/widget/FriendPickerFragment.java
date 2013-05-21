@@ -1,3 +1,5 @@
+/** This file has been modified by DeNA Co., Ltd. */
+
 /**
  * Copyright 2010-present Facebook.
  *
@@ -23,7 +25,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import com.facebook.*;
-import com.facebook.android.R;
+import com.facebook.MobageFacebookResources;
 import com.facebook.model.GraphUser;
 
 import java.util.Arrays;
@@ -68,7 +70,7 @@ public class FriendPickerFragment extends PickerFragment<GraphUser> {
      */
     @SuppressLint("ValidFragment")
     public FriendPickerFragment(Bundle args) {
-        super(GraphUser.class, R.layout.com_facebook_friendpickerfragment, args);
+        super(GraphUser.class, MobageFacebookResources.layout("com_facebook_friendpickerfragment"), args);
         setFriendPickerSettingsFromBundle(args);
     }
 
@@ -120,9 +122,9 @@ public class FriendPickerFragment extends PickerFragment<GraphUser> {
     @Override
     public void onInflate(Activity activity, AttributeSet attrs, Bundle savedInstanceState) {
         super.onInflate(activity, attrs, savedInstanceState);
-        TypedArray a = activity.obtainStyledAttributes(attrs, R.styleable.com_facebook_friend_picker_fragment);
+        TypedArray a = activity.obtainStyledAttributes(attrs, MobageFacebookResources.convertToArray(MobageFacebookResources.styleable("com_facebook_friend_picker_fragment")));
 
-        setMultiSelect(a.getBoolean(R.styleable.com_facebook_friend_picker_fragment_multi_select, multiSelect));
+        setMultiSelect(a.getBoolean(MobageFacebookResources.styleable("com_facebook_friend_picker_fragment_multi_select"), multiSelect));
 
         a.recycle();
     }
@@ -146,12 +148,12 @@ public class FriendPickerFragment extends PickerFragment<GraphUser> {
 
             @Override
             protected int getGraphObjectRowLayoutId(GraphUser graphObject) {
-                return R.layout.com_facebook_picker_list_row;
+                return MobageFacebookResources.layout("com_facebook_picker_list_row");
             }
 
             @Override
             protected int getDefaultPicture() {
-                return R.drawable.com_facebook_profile_default_icon;
+                return MobageFacebookResources.drawable("com_facebook_profile_default_icon");
             }
 
         };
@@ -185,7 +187,7 @@ public class FriendPickerFragment extends PickerFragment<GraphUser> {
 
     @Override
     String getDefaultTitleText() {
-        return getString(R.string.com_facebook_choose_friends);
+        return getString(MobageFacebookResources.string("com_facebook_choose_friends"));
     }
 
     private Request createRequest(String userID, Set<String> extraFields, Session session) {

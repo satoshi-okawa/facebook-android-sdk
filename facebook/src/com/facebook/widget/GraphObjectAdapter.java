@@ -1,3 +1,5 @@
+/** This file has been modified by DeNA Co., Ltd. */
+
 /**
  * Copyright 2010-present Facebook.
  *
@@ -24,7 +26,7 @@ import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.*;
 import com.facebook.*;
-import com.facebook.android.R;
+import com.facebook.MobageFacebookResources;
 import com.facebook.model.GraphObject;
 import org.json.JSONObject;
 
@@ -282,7 +284,7 @@ class GraphObjectAdapter<T extends GraphObject> extends BaseAdapter implements S
         TextView result = (TextView) convertView;
 
         if (result == null) {
-            result = (TextView) inflater.inflate(R.layout.com_facebook_picker_list_section_header, null);
+            result = (TextView) inflater.inflate(MobageFacebookResources.layout("com_facebook_picker_list_section_header"), null);
         }
 
         result.setText(sectionHeader);
@@ -305,26 +307,26 @@ class GraphObjectAdapter<T extends GraphObject> extends BaseAdapter implements S
         View result = convertView;
 
         if (result == null) {
-            result = inflater.inflate(R.layout.com_facebook_picker_activity_circle_row, null);
+            result = inflater.inflate(MobageFacebookResources.layout("com_facebook_picker_activity_circle_row"), null);
         }
-        ProgressBar activityCircle = (ProgressBar) result.findViewById(R.id.com_facebook_picker_row_activity_circle);
+        ProgressBar activityCircle = (ProgressBar) result.findViewById(MobageFacebookResources.id("com_facebook_picker_row_activity_circle"));
         activityCircle.setVisibility(View.VISIBLE);
 
         return result;
     }
 
     protected int getGraphObjectRowLayoutId(T graphObject) {
-        return R.layout.com_facebook_picker_list_row;
+        return MobageFacebookResources.layout("com_facebook_picker_list_row");
     }
 
     protected int getDefaultPicture() {
-        return R.drawable.com_facebook_profile_default_icon;
+        return MobageFacebookResources.drawable("com_facebook_profile_default_icon");
     }
 
     protected View createGraphObjectView(T graphObject, View convertView) {
         View result = inflater.inflate(getGraphObjectRowLayoutId(graphObject), null);
 
-        ViewStub checkboxStub = (ViewStub) result.findViewById(R.id.com_facebook_picker_checkbox_stub);
+        ViewStub checkboxStub = (ViewStub) result.findViewById(MobageFacebookResources.id("com_facebook_picker_checkbox_stub"));
         if (checkboxStub != null) {
             if (!getShowCheckbox()) {
                 checkboxStub.setVisibility(View.GONE);
@@ -334,7 +336,7 @@ class GraphObjectAdapter<T extends GraphObject> extends BaseAdapter implements S
             }
         }
 
-        ViewStub profilePicStub = (ViewStub) result.findViewById(R.id.com_facebook_picker_profile_pic_stub);
+        ViewStub profilePicStub = (ViewStub) result.findViewById(MobageFacebookResources.id("com_facebook_picker_profile_pic_stub"));
         if (!getShowPicture()) {
             profilePicStub.setVisibility(View.GONE);
         } else {
@@ -350,13 +352,13 @@ class GraphObjectAdapter<T extends GraphObject> extends BaseAdapter implements S
         view.setTag(id);
 
         CharSequence title = getTitleOfGraphObject(graphObject);
-        TextView titleView = (TextView) view.findViewById(R.id.com_facebook_picker_title);
+        TextView titleView = (TextView) view.findViewById(MobageFacebookResources.id("com_facebook_picker_title"));
         if (titleView != null) {
             titleView.setText(title, TextView.BufferType.SPANNABLE);
         }
 
         CharSequence subtitle = getSubTitleOfGraphObject(graphObject);
-        TextView subtitleView = (TextView) view.findViewById(R.id.picker_subtitle);
+        TextView subtitleView = (TextView) view.findViewById(MobageFacebookResources.id("picker_subtitle"));
         if (subtitleView != null) {
             if (subtitle != null) {
                 subtitleView.setText(subtitle, TextView.BufferType.SPANNABLE);
@@ -367,7 +369,7 @@ class GraphObjectAdapter<T extends GraphObject> extends BaseAdapter implements S
         }
 
         if (getShowCheckbox()) {
-            CheckBox checkBox = (CheckBox) view.findViewById(R.id.com_facebook_picker_checkbox);
+            CheckBox checkBox = (CheckBox) view.findViewById(MobageFacebookResources.id("com_facebook_picker_checkbox"));
             updateCheckboxState(checkBox, isGraphObjectSelected(id));
         }
 
@@ -375,7 +377,7 @@ class GraphObjectAdapter<T extends GraphObject> extends BaseAdapter implements S
             URL pictureURL = getPictureUrlOfGraphObject(graphObject);
 
             if (pictureURL != null) {
-                ImageView profilePic = (ImageView) view.findViewById(R.id.com_facebook_picker_image);
+                ImageView profilePic = (ImageView) view.findViewById(MobageFacebookResources.id("com_facebook_picker_image"));
 
                 // See if we have already pre-fetched this; if not, download it.
                 if (prefetchedPictureCache.containsKey(id)) {
@@ -425,7 +427,7 @@ class GraphObjectAdapter<T extends GraphObject> extends BaseAdapter implements S
     String getPictureFieldSpecifier() {
         // How big is our image?
         View view = createGraphObjectView(null, null);
-        ImageView picture = (ImageView) view.findViewById(R.id.com_facebook_picker_image);
+        ImageView picture = (ImageView) view.findViewById(MobageFacebookResources.id("com_facebook_picker_image"));
         if (picture == null) {
             return null;
         }

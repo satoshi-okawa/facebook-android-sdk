@@ -1,3 +1,5 @@
+/** This file has been modified by DeNA Co., Ltd. */
+
 /**
  * Copyright 2010-present Facebook.
  *
@@ -20,7 +22,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import com.facebook.android.R;
+import com.facebook.MobageFacebookResources;
 
 /**
  * This Activity is a necessary part of the overall Facebook login process
@@ -52,7 +54,7 @@ public class LoginActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.com_facebook_login_activity_layout);
+        setContentView(MobageFacebookResources.layout("com_facebook_login_activity_layout"));
 
         if (savedInstanceState != null) {
             callingPackage = savedInstanceState.getString(SAVED_CALLING_PKG_KEY);
@@ -73,12 +75,12 @@ public class LoginActivity extends Activity {
         authorizationClient.setBackgroundProcessingListener(new AuthorizationClient.BackgroundProcessingListener() {
             @Override
             public void onBackgroundProcessingStarted() {
-                findViewById(R.id.com_facebook_login_activity_progress_bar).setVisibility(View.VISIBLE);
+                findViewById(MobageFacebookResources.id("com_facebook_login_activity_progress_bar")).setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onBackgroundProcessingStopped() {
-                findViewById(R.id.com_facebook_login_activity_progress_bar).setVisibility(View.GONE);
+                findViewById(MobageFacebookResources.id("com_facebook_login_activity_progress_bar")).setVisibility(View.GONE);
             }
         });
     }
@@ -118,7 +120,7 @@ public class LoginActivity extends Activity {
         super.onPause();
 
         authorizationClient.cancelCurrentHandler();
-        findViewById(R.id.com_facebook_login_activity_progress_bar).setVisibility(View.GONE);
+        findViewById(MobageFacebookResources.id("com_facebook_login_activity_progress_bar")).setVisibility(View.GONE);
     }
 
     @Override

@@ -1,3 +1,5 @@
+/** This file has been modified by DeNA Co., Ltd. */
+
 /**
  * Copyright 2010-present Facebook.
  *
@@ -29,7 +31,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import com.facebook.FacebookException;
 import com.facebook.LoggingBehavior;
-import com.facebook.android.R;
+import com.facebook.MobageFacebookResources;
 import com.facebook.internal.Logger;
 import com.facebook.internal.Utility;
 
@@ -372,9 +374,9 @@ public class ProfilePictureView extends FrameLayout {
     }
 
     private void parseAttributes(AttributeSet attrs) {
-        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.com_facebook_profile_picture_view);
-        setPresetSize(a.getInt(R.styleable.com_facebook_profile_picture_view_preset_size, CUSTOM));
-        isCropped = a.getBoolean(R.styleable.com_facebook_profile_picture_view_is_cropped, IS_CROPPED_DEFAULT_VALUE);
+        TypedArray a = getContext().obtainStyledAttributes(attrs, MobageFacebookResources.convertToArray(MobageFacebookResources.styleable("com_facebook_profile_picture_view")));
+        setPresetSize(a.getInt(MobageFacebookResources.styleable("com_facebook_profile_picture_view_preset_size"), CUSTOM));
+        isCropped = a.getBoolean(MobageFacebookResources.styleable("com_facebook_profile_picture_view_is_cropped"), IS_CROPPED_DEFAULT_VALUE);
         a.recycle();
     }
 
@@ -393,8 +395,8 @@ public class ProfilePictureView extends FrameLayout {
 
     private void setBlankProfilePicture() {
         int blankImageResource = isCropped() ?
-                R.drawable.com_facebook_profile_picture_blank_square :
-                R.drawable.com_facebook_profile_picture_blank_portrait;
+                MobageFacebookResources.drawable("com_facebook_profile_picture_blank_square") :
+                MobageFacebookResources.drawable("com_facebook_profile_picture_blank_portrait");
         setImageBitmap( BitmapFactory.decodeResource(getResources(), blankImageResource));
     }
 
@@ -496,19 +498,19 @@ public class ProfilePictureView extends FrameLayout {
         int dimensionId;
         switch (presetSizeType) {
             case SMALL:
-                dimensionId = R.dimen.com_facebook_profilepictureview_preset_size_small;
+                dimensionId = MobageFacebookResources.dimen("com_facebook_profilepictureview_preset_size_small");
                 break;
             case NORMAL:
-                dimensionId = R.dimen.com_facebook_profilepictureview_preset_size_normal;
+                dimensionId = MobageFacebookResources.dimen("com_facebook_profilepictureview_preset_size_normal");
                 break;
             case LARGE:
-                dimensionId = R.dimen.com_facebook_profilepictureview_preset_size_large;
+                dimensionId = MobageFacebookResources.dimen("com_facebook_profilepictureview_preset_size_large");
                 break;
             case CUSTOM:
                 if (!forcePreset) {
                     return ImageRequest.UNSPECIFIED_DIMENSION;
                 } else {
-                    dimensionId = R.dimen.com_facebook_profilepictureview_preset_size_normal;
+                    dimensionId = MobageFacebookResources.dimen("com_facebook_profilepictureview_preset_size_normal");
                     break;
                 }
             default:

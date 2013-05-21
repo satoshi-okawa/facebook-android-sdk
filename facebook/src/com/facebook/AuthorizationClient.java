@@ -1,3 +1,5 @@
+/** This file has been modified by DeNA Co., Ltd. */
+
 /**
  * Copyright 2010-present Facebook.
  *
@@ -26,7 +28,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.webkit.CookieSyncManager;
-import com.facebook.android.R;
+import com.facebook.MobageFacebookResources;
 import com.facebook.internal.ServerProtocol;
 import com.facebook.internal.Utility;
 import com.facebook.model.GraphMultiResult;
@@ -175,8 +177,8 @@ class AuthorizationClient implements Serializable {
 
         int permissionCheck = checkPermission(Manifest.permission.INTERNET);
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            String errorType = context.getString(R.string.com_facebook_internet_permission_error_title);
-            String errorDescription = context.getString(R.string.com_facebook_internet_permission_error_message);
+            String errorType = context.getString(MobageFacebookResources.string("com_facebook_internet_permission_error_title"));
+            String errorDescription = context.getString(MobageFacebookResources.string("com_facebook_internet_permission_error_message"));
             complete(Result.createErrorResult(errorType, errorDescription));
 
             return false;
